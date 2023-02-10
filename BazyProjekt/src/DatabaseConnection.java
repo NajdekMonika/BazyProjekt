@@ -7,6 +7,7 @@ public class DatabaseConnection {
     public static Account checkIfAccountExists(String username, String password){
         Account account = null;
         try{
+            //Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kawy", "root", "studia123");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from konta where login='" + username + "' and hasło ='" + password + "'");
@@ -18,13 +19,15 @@ public class DatabaseConnection {
             connection.close();
 
         }
-        catch(SQLException e){}
+        catch(SQLException  e){e.printStackTrace();
+        }
         return account;
     }
 
     public static List<Coffee> filterCoffees(List<String> attributes, List<String> conditions) {
         List<Coffee> coffees = new ArrayList<>();
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kawy", "root", "studia123");
             Statement statement = connection.createStatement();
             String sql = "select * from kawa_view where ";
@@ -58,7 +61,8 @@ public class DatabaseConnection {
                         ));
             }
         }
-        catch(SQLException e){e.printStackTrace();}
+        catch(SQLException | ClassNotFoundException e){e.printStackTrace();
+        }
 
         return coffees;
     }
