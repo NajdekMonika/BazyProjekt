@@ -88,8 +88,8 @@ public class Main {
 
             } else {
                 String attribute = switch (choice) {
-                    case 5 -> "typ";
-                    case 6 -> "producent";
+                    case 5 -> "typy";
+                    case 6 -> "producenci";
                     case 7 -> "rejon";
                     case 8 -> "kraj";
                     default -> "";
