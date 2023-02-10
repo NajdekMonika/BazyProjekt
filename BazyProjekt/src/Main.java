@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws SQLException {
        mainApp();
     }
@@ -14,11 +15,34 @@ public class Main {
             Account acc = login();
             if (acc != null) {
                 System.out.println("Jesteś zalogowany!");
-                filterCoffee();
+                customerMenu();
                 break;
             } else {
                 System.out.println("Niepoprawne hasło lub login spróbuj ponownie");
             }
+        }
+    }
+
+    public static void customerMenu(){
+        System.out.println("Wybierz, co chcesz zrobić: ");
+        System.out.println("Wpisz 1, jeśli chcesz przeglądać kawy według zadanych parametrów");
+        System.out.println("Wpisz 2, jeśli chcesz złożyć zamówienie");
+        System.out.println("Wpisz 3, jeśli chcesz zobaczyć swoje poprzednie zamówienia");
+        int answer = sc.nextInt();
+        switch (answer){
+            case 1:
+                filterCoffee();
+                break;
+            case 2:
+                //tu miejsce na funkcję służącą do składania zamówienia
+                break;
+            case 3:
+                //tu miejsce na funkcję drukującą poprzednie zamówienia
+                break;
+            default:
+                System.out.println("Podano złą odpowiedź");
+                customerMenu();
+                break;
         }
     }
 
@@ -32,7 +56,6 @@ public class Main {
     }
 
     public static void filterCoffee() {
-        Scanner sc = new Scanner(System.in);
         List<String> conditions = new ArrayList<>();
         List<String> attributes = new ArrayList<>();
         while (true) {
